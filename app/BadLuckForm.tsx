@@ -27,9 +27,35 @@ function proxiedImageUrl(imageUrl: string) {
   return `/api/image-proxy?url=${encodeURIComponent(imageUrl)}`;
 }
 
+function GeneratedImage({ imageUrl }: { imageUrl: string }) {
+  const [failedImageUrl, setFailedImageUrl] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+  const imageSrc =
+    failedImageUrl === imageUrl ? proxiedImageUrl(imageUrl) : imageUrl;
+
+  return (
+    <div className="badluck-result__image">
+      {!isLoaded ? (
+        <div className="badluck-result__image-loader" aria-hidden="true">
+          <div className="badluck-result__loader" />
+        </div>
+      ) : null}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imageSrc}
+        alt="Imagen generada de Bad Luck Ryan"
+        decoding="async"
+        fetchPriority="high"
+        referrerPolicy="no-referrer"
+        onError={() => setFailedImageUrl(imageUrl)}
+        onLoad={() => setIsLoaded(true)}
+      />
+    </div>
+  );
+}
+
 function GeneratedImagePreview({ state }: { state: BadLuckSubmissionState }) {
   const { pending } = useFormStatus();
-  const [failedImageUrl, setFailedImageUrl] = useState("");
 
   if (pending) {
     return (
@@ -41,26 +67,13 @@ function GeneratedImagePreview({ state }: { state: BadLuckSubmissionState }) {
   }
 
   if (state.status === "success" && state.imageUrl) {
-    const imageSrc =
-      failedImageUrl === state.imageUrl
-        ? proxiedImageUrl(state.imageUrl)
-        : state.imageUrl;
-
     return (
       <div
         className="badluck-result"
         aria-label={state.message}
         aria-live="polite"
       >
-        <div className="badluck-result__image">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageSrc}
-            alt="Imagen generada de Bad Luck Ryan"
-            referrerPolicy="no-referrer"
-            onError={() => setFailedImageUrl(state.imageUrl ?? "")}
-          />
-        </div>
+        <GeneratedImage key={state.imageUrl} imageUrl={state.imageUrl} />
       </div>
     );
   }

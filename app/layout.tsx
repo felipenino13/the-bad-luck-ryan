@@ -33,6 +33,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://cdn.uploadtourl.com" />
+        <link rel="dns-prefetch" href="https://cdn.uploadtourl.com" />
+        <link rel="preconnect" href="https://flagcdn.com" />
+        <link rel="dns-prefetch" href="https://flagcdn.com" />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {children}
       </body>

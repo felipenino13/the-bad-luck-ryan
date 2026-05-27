@@ -6,11 +6,12 @@ export default function Home() {
     <main className="badluck-page">
       <Image
         className="badluck-background"
-        src="/background-ryan-100.jpg"
+        src="/background-ryan-optimized.jpg"
         alt="Ryan Castro con dibujos de mala suerte alrededor"
         fill
-        sizes="100vw"
-        priority
+        sizes="(max-width: 700px) 100vw, 1600px"
+        preload
+        quality={75}
       />
 
       <section className="badluck-card" aria-labelledby="badluck-title">
@@ -18,12 +19,10 @@ export default function Home() {
           <h1 id="badluck-title">THE BAD LUCK RYAN</h1>
           <Image
             className="badluck-avatar"
-            src="/gif-ryan.gif"
+            src="/avatar-ryan.webp"
             alt="Ryan Castro"
             width={88}
             height={88}
-            unoptimized
-            priority
           />
         </header>
 

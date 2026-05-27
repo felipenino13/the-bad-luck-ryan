@@ -137,6 +137,16 @@ button {
   overflow: hidden;
 }
 
+.badluck-result__image-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background: #f5f5f5;
+  padding: 24px;
+}
+
 .badluck-result__image img {
   display: block;
   width: 100%;

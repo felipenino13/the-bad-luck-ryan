@@ -24,10 +24,13 @@ export async function GET(request: Request) {
   }
 
   const imageResponse = await fetch(parsedImageUrl, {
-    cache: "no-store",
+    cache: "force-cache",
     headers: {
       Accept: "image/*",
       "User-Agent": "Mozilla/5.0",
+    },
+    next: {
+      revalidate: 86400,
     },
   });
 
@@ -43,7 +46,7 @@ export async function GET(request: Request) {
 
   return new Response(imageBody, {
     headers: {
-      "Cache-Control": "no-store",
+      "Cache-Control": "public, max-age=86400, s-maxage=86400",
       "Content-Type": contentType,
     },
   });
