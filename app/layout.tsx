@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "The Bad Luck Ryan",
   description: "Viste a Ryan Castro con los colores del rival.",
+  icons: {
+    apple: "/icon-herradura.svg",
+    icon: "/icon-herradura.svg",
+    shortcut: "/icon-herradura.svg",
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +31,11 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
