@@ -94,6 +94,10 @@ function DownloadButton({ state }: { state: BadLuckSubmissionState }) {
   const [isDownloading, setIsDownloading] = useState(false);
   const canDownload = Boolean(state.imageUrl) && !pending && !isDownloading;
 
+  if (!state.imageUrl) {
+    return null;
+  }
+
   async function downloadImage() {
     if (!state.imageUrl) {
       return;
@@ -129,13 +133,20 @@ function DownloadButton({ state }: { state: BadLuckSubmissionState }) {
 
 export default function BadLuckForm() {
   const [state, formAction] = useActionState(submitBadLuckTeam, initialState);
+  const hasGeneratedImage = Boolean(state.imageUrl);
 
   return (
     <form action={formAction} className="badluck-form">
       <GeneratedImagePreview state={state} />
       <TeamCombobox />
 
-      <div className="badluck-actions">
+      <div
+        className={
+          hasGeneratedImage
+            ? "badluck-actions"
+            : "badluck-actions badluck-actions--single"
+        }
+      >
         <GenerateButton />
         <DownloadButton state={state} />
       </div>

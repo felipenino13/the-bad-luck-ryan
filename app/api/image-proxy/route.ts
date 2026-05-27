@@ -23,16 +23,22 @@ export async function GET(request: Request) {
     return new Response("Image host is not allowed", { status: 400 });
   }
 
-  const imageResponse = await fetch(parsedImageUrl, {
-    cache: "force-cache",
-    headers: {
-      Accept: "image/*",
-      "User-Agent": "Mozilla/5.0",
-    },
-    next: {
-      revalidate: 86400,
-    },
-  });
+  let imageResponse: Response;
+
+  try {
+    imageResponse = await fetch(parsedImageUrl, {
+      cache: "force-cache",
+      headers: {
+        Accept: "image/*",
+        "User-Agent": "Mozilla/5.0",
+      },
+      next: {
+        revalidate: 86400,
+      },
+    });
+  } catch {
+    return new Response("Image request failed", { status: 502 });
+  }
 
   if (!imageResponse.ok) {
     return new Response("Image could not be loaded", {
@@ -42,7 +48,13 @@ export async function GET(request: Request) {
 
   const contentType =
     imageResponse.headers.get("content-type") ?? "image/png";
-  const imageBody = await imageResponse.arrayBuffer();
+  let imageBody: ArrayBuffer;
+
+  try {
+    imageBody = await imageResponse.arrayBuffer();
+  } catch {
+    return new Response("Image body could not be read", { status: 502 });
+  }
 
   return new Response(imageBody, {
     headers: {

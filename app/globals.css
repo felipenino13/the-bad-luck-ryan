@@ -297,6 +297,10 @@ button {
   margin-top: 24px;
 }
 
+.badluck-actions--single {
+  justify-content: center;
+}
+
 .badluck-actions button {
   width: 105px;
   height: 42px;

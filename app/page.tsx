@@ -2,8 +2,25 @@ import Image from "next/image";
 import BadLuckForm from "./BadLuckForm";
 
 export default function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    applicationCategory: "EntertainmentApplication",
+    description:
+      "Genera y comparte una imagen de Ryan Castro usando la camiseta del rival para invocar la mala suerte del otro equipo.",
+    image: "https://badluckryan.crisnnino.com/og-bad-luck-ryan.jpg",
+    inLanguage: "es-CO",
+    name: "The Bad Luck Ryan",
+    operatingSystem: "Web",
+    url: "https://badluckryan.crisnnino.com/",
+  };
+
   return (
     <main className="badluck-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Image
         className="badluck-background"
         src="/background-ryan-optimized.jpg"
