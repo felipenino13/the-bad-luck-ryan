@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ededed;
+  --foreground: #050505;
+  --badluck-red: #f00600;
+  --badluck-border: #050505;
 }
 
 @theme inline {
@@ -12,15 +14,406 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-mono), "Arial Narrow", monospace;
+}
+
+button {
+  font: inherit;
+}
+
+.badluck-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  background:
+    linear-gradient(to bottom, transparent 0 73.2%, var(--badluck-red) 73.2% 100%),
+    #ededed;
+  padding: clamp(190px, 31vh, 292px) 24px 40px;
+}
+
+.badluck-background {
+  z-index: 0;
+  height: 73.2% !important;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+}
+
+.badluck-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 580px);
+  border: 1px solid var(--badluck-border);
+  background: #fff;
+  box-shadow: none;
+}
+
+.badluck-card__header {
+  display: flex;
+  min-height: 124px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--badluck-border);
+  padding: 17px 25px 17px 28px;
+}
+
+.badluck-card__header h1 {
+  margin: 0;
+  font-family: "Arial Narrow", "Roboto Condensed", var(--font-geist-sans), sans-serif;
+  font-size: clamp(2.25rem, 3.35vw, 2.85rem);
+  font-stretch: condensed;
+  font-weight: 800;
+  line-height: 1;
+  min-width: 0;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.badluck-avatar {
+  width: clamp(62px, 14vw, 88px);
+  height: clamp(62px, 14vw, 88px);
+  flex: 0 0 clamp(62px, 14vw, 88px);
+  border: 4px solid var(--badluck-border);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.badluck-card__body {
+  padding: 28px 35px 28px;
+}
+
+.badluck-copy {
+  width: min(100%, 476px);
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.badluck-copy p {
+  margin: 0;
+}
+
+.badluck-copy p + p {
+  margin-top: 18px;
+}
+
+.badluck-copy strong {
+  font-weight: 800;
+}
+
+.badluck-result {
+  margin: 30px 0 0;
+}
+
+.badluck-result__image,
+.badluck-result--loading {
+  width: 100%;
+  border: 1px solid var(--badluck-border);
+  background: #f5f5f5;
+}
+
+.badluck-result__image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.badluck-result__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badluck-result--loading p,
+.badluck-result--error {
+  margin: 10px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.badluck-result--loading {
+  display: grid;
+  min-height: 174px;
+  place-items: center;
+  padding: 24px;
+}
+
+.badluck-result__loader {
+  width: min(100%, 300px);
+  height: 118px;
+  overflow: hidden;
+  border: 1px solid #d1d1d1;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent),
+    linear-gradient(#dedede, #dedede) 50% 26px / 70% 14px no-repeat,
+    linear-gradient(#e7e7e7, #e7e7e7) 50% 56px / 86% 10px no-repeat,
+    linear-gradient(#e7e7e7, #e7e7e7) 50% 76px / 62% 10px no-repeat,
+    #f0f0f0;
+  background-size: 48% 100%, 70% 14px, 86% 10px, 62% 10px, auto;
+  animation: badluck-shimmer 1.15s linear infinite;
+}
+
+.badluck-result--error {
+  border: 1px solid var(--badluck-border);
+  background: #fff;
+  color: #a00000;
+  padding: 12px;
+}
+
+.badluck-combobox {
+  position: relative;
+  margin-top: 34px;
+}
+
+.badluck-combobox__field {
+  position: relative;
+  display: flex;
+  height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--badluck-border);
+  padding: 0 14px 0 22px;
+  color: #171717;
+  font-size: 0.8125rem;
+}
+
+.badluck-combobox__field input {
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #171717;
+  font: inherit;
+}
+
+.badluck-combobox__selected-flag {
+  width: 24px;
+  height: 16px;
+  flex: 0 0 auto;
+  border: 1px solid #d7d7d7;
+  object-fit: cover;
+}
+
+.badluck-combobox__field input::placeholder {
+  color: #171717;
+  opacity: 1;
+}
+
+.badluck-combobox__field img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.badluck-combobox__options {
+  position: relative;
+  z-index: 3;
+  top: auto;
+  right: 0;
+  left: 0;
+  max-height: min(244px, 42vh);
+  margin: 6px 0 0;
+  overflow-y: auto;
+  border: 1px solid var(--badluck-border);
+  background: #fff;
+  padding: 4px;
+  list-style: none;
+}
+
+.badluck-combobox__options button,
+.badluck-combobox__empty {
+  display: flex;
+  width: 100%;
+  min-height: 38px;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: #fff;
+  color: #050505;
+  padding: 8px 10px;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.badluck-combobox__options img {
+  width: 24px;
+  height: 16px;
+  flex: 0 0 auto;
+  border: 1px solid #d7d7d7;
+  object-fit: cover;
+}
+
+.badluck-combobox__options button {
+  cursor: pointer;
+}
+
+.badluck-combobox__options button:hover,
+.badluck-combobox__options button:focus-visible {
+  background: #f1f1f1;
+  outline: none;
+}
+
+.badluck-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.badluck-actions button {
+  width: 105px;
+  height: 42px;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.6875rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.badluck-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+@keyframes badluck-shimmer {
+  from {
+    background-position: -180px 0, 50% 26px, 50% 56px, 50% 76px, 0 0;
+  }
+
+  to {
+    background-position: 260px 0, 50% 26px, 50% 56px, 50% 76px, 0 0;
+  }
+}
+
+.badluck-warning {
+  position: relative;
+  z-index: 1;
+  bottom: auto;
+  left: auto;
+  width: min(90vw, 620px);
+  margin: clamp(10px, 1.5vh, 18px) 0 0;
+  transform: none;
+  color: #fff;
+  font-family: "Arial Narrow", Impact, var(--font-geist-sans), sans-serif;
+  font-size: clamp(0.875rem, 1.2vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .badluck-page {
+    min-height: 100svh;
+    overflow-y: auto;
+    padding: 170px 18px 94px;
+    background:
+      linear-gradient(to bottom, transparent 0 52%, var(--badluck-red) 52% 100%),
+      #ededed;
+  }
+
+  .badluck-background {
+    height: 52% !important;
+    object-position: center top;
+  }
+
+  .badluck-card__header {
+    min-height: auto;
+    padding: 18px 18px 16px;
+  }
+
+  .badluck-card__header h1 {
+    font-size: clamp(1.75rem, 8.8vw, 2.65rem);
+    white-space: nowrap;
+  }
+
+  .badluck-avatar {
+    width: 70px;
+    height: 70px;
+    border-width: 3px;
+  }
+
+  .badluck-card__body {
+    padding: 28px 20px 26px;
+  }
+
+  .badluck-copy {
+    font-size: 0.75rem;
+  }
+
+  .badluck-result {
+    margin-top: 24px;
+  }
+
+  .badluck-combobox {
+    margin-top: 32px;
+  }
+
+  .badluck-combobox__field {
+    padding-left: 14px;
+    font-size: 0.72rem;
+  }
+
+  .badluck-actions {
+    margin-top: 26px;
+  }
+
+  .badluck-actions button {
+    width: 104px;
+  }
+
+  .badluck-warning {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .badluck-page {
+    padding-top: 148px;
+  }
+
+  .badluck-card__header {
+    gap: 10px;
+    padding-inline: 14px;
+  }
+
+  .badluck-card__header h1 {
+    font-size: clamp(1.45rem, 7.6vw, 2.15rem);
+  }
+
+  .badluck-avatar {
+    border-width: 3px;
+  }
+
+  .badluck-actions {
+    gap: 16px;
+  }
 }
