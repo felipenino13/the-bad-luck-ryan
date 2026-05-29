@@ -10,8 +10,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Datatype", sans-serif;
+  --font-mono: "Datatype", sans-serif;
 }
 
 * {
@@ -27,7 +27,7 @@ body {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-mono), "Arial Narrow", monospace;
+  font-family: "Datatype", sans-serif;
 }
 
 button {
@@ -36,76 +36,92 @@ button {
 
 .badluck-page {
   position: relative;
-  display: flex;
-  flex-direction: column;
   min-height: 100svh;
-  align-items: center;
-  justify-content: flex-start;
   overflow-x: hidden;
-  background:
-    linear-gradient(to bottom, transparent 0 73.2%, var(--badluck-red) 73.2% 100%),
-    #ededed;
-  padding: clamp(190px, 31vh, 292px) 24px 40px;
+  background: var(--badluck-red);
+}
+
+.badluck-hero {
+  --panel-width: min(calc(100vw - 48px), 508px);
+  position: relative;
+  display: flex;
+  height: clamp(350px, 53.4vw, 432px);
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  background: #ededed;
 }
 
 .badluck-background {
   z-index: 0;
-  height: 73.2% !important;
   object-fit: cover;
   object-position: center top;
   pointer-events: none;
 }
 
-.badluck-card {
+.badluck-title-card {
   position: relative;
   z-index: 1;
-  width: min(100%, 580px);
+  width: var(--panel-width);
   border: 1px solid var(--badluck-border);
-  background: #fff;
-  box-shadow: none;
+  border-bottom: 0;
+  background: #eeeeee;
 }
 
-.badluck-card__header {
+.badluck-title-card h1 {
   display: flex;
-  min-height: 124px;
+  min-height: 116px;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  border-bottom: 1px solid var(--badluck-border);
-  padding: 17px 25px 17px 28px;
-}
-
-.badluck-card__header h1 {
+  justify-content: center;
+  gap: 20px;
   margin: 0;
-  font-family: "Arial Narrow", "Roboto Condensed", var(--font-geist-sans), sans-serif;
-  font-size: clamp(2.25rem, 3.35vw, 2.85rem);
+  padding: 16px 25px;
+  font-family: "Datatype", sans-serif;
+  font-size: clamp(3rem, 4.7vw, 3.6rem);
   font-stretch: condensed;
   font-weight: 800;
   line-height: 1;
-  min-width: 0;
   letter-spacing: 0;
   white-space: nowrap;
+  border-bottom: 1px solid var(--badluck-border);
+}
+
+.badluck-title-card h1 span {
+  min-width: 0;
 }
 
 .badluck-avatar {
-  width: clamp(62px, 14vw, 88px);
-  height: clamp(62px, 14vw, 88px);
-  flex: 0 0 clamp(62px, 14vw, 88px);
-  border: 4px solid var(--badluck-border);
+  width: 74px;
+  height: 74px;
+  flex: 0 0 74px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.badluck-card__body {
-  padding: 28px 35px 28px;
+.badluck-playground {
+  --panel-width: min(calc(100vw - 48px), 508px);
+  display: flex;
+  min-height: calc(100svh - clamp(350px, 53.4vw, 432px));
+  flex-direction: column;
+  align-items: center;
+  background: var(--badluck-red);
+  padding: 0 24px clamp(44px, 6vh, 72px);
+}
+
+.badluck-form-card {
+  width: var(--panel-width);
+  border: 1px solid var(--badluck-border);
+  border-top: 0;
+  background: #eeeeee;
+  padding: 38px 31px 25px;
 }
 
 .badluck-copy {
-  width: min(100%, 476px);
+  width: min(100%, 420px);
   margin: 0 auto;
   text-align: center;
-  font-size: 0.75rem;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  line-height: 1.45;
 }
 
 .badluck-copy p {
@@ -113,7 +129,7 @@ button {
 }
 
 .badluck-copy p + p {
-  margin-top: 18px;
+  margin-top: 21px;
 }
 
 .badluck-copy strong {
@@ -193,13 +209,13 @@ button {
 
 .badluck-combobox {
   position: relative;
-  margin-top: 34px;
+  margin-top: 35px;
 }
 
 .badluck-combobox__field {
   position: relative;
   display: flex;
-  height: 52px;
+  height: 46px;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -294,7 +310,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-top: 24px;
+  margin-top: 27px;
 }
 
 .badluck-actions--single {
@@ -302,13 +318,13 @@ button {
 }
 
 .badluck-actions button {
-  width: 105px;
-  height: 42px;
+  width: 92px;
+  height: 37px;
   border: 1px solid #000;
   background: #000;
   color: #fff;
   cursor: pointer;
-  font-size: 0.6875rem;
+  font-size: 0.9rem;
   line-height: 1;
   text-align: center;
 }
@@ -334,10 +350,10 @@ button {
   bottom: auto;
   left: auto;
   width: min(90vw, 620px);
-  margin: clamp(10px, 1.5vh, 18px) 0 0;
+  margin: clamp(32px, 5vh, 39px) 0 0;
   transform: none;
   color: #fff;
-  font-family: "Arial Narrow", Impact, var(--font-geist-sans), sans-serif;
+  font-family: "Datatype", sans-serif;
   font-size: clamp(0.875rem, 1.2vw, 1.0625rem);
   font-weight: 400;
   line-height: 1.25;
@@ -345,42 +361,42 @@ button {
 }
 
 @media (max-width: 700px) {
-  .badluck-page {
-    min-height: 100svh;
-    overflow-y: auto;
-    padding: 170px 18px 94px;
-    background:
-      linear-gradient(to bottom, transparent 0 52%, var(--badluck-red) 52% 100%),
-      #ededed;
+  .badluck-hero {
+    --panel-width: min(calc(100vw - 36px), 508px);
+    height: clamp(292px, 78vw, 360px);
   }
 
   .badluck-background {
-    height: 52% !important;
     object-position: center top;
   }
 
-  .badluck-card__header {
-    min-height: auto;
-    padding: 18px 18px 16px;
+  .badluck-title-card h1 {
+    min-height: 92px;
+    gap: 11px;
+    padding: 13px 12px;
+    font-size: clamp(2.05rem, 9vw, 3rem);
   }
 
-  .badluck-card__header h1 {
-    font-size: clamp(1.75rem, 8.8vw, 2.65rem);
-    white-space: nowrap;
+  .badluck-playground {
+    --panel-width: min(calc(100vw - 36px), 508px);
+    min-height: calc(100svh - clamp(292px, 78vw, 360px));
+    padding: 0 18px 54px;
   }
 
   .badluck-avatar {
-    width: 70px;
-    height: 70px;
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
     border-width: 3px;
   }
 
-  .badluck-card__body {
-    padding: 28px 20px 26px;
+  .badluck-form-card {
+    padding: 30px 20px 25px;
   }
 
   .badluck-copy {
     font-size: 0.75rem;
+    line-height: 1.45;
   }
 
   .badluck-result {
@@ -388,7 +404,7 @@ button {
   }
 
   .badluck-combobox {
-    margin-top: 32px;
+    margin-top: 31px;
   }
 
   .badluck-combobox__field {
@@ -397,7 +413,7 @@ button {
   }
 
   .badluck-actions {
-    margin-top: 26px;
+    margin-top: 27px;
   }
 
   .badluck-actions button {
@@ -410,21 +426,22 @@ button {
 }
 
 @media (max-width: 520px) {
-  .badluck-page {
-    padding-top: 148px;
-  }
-
-  .badluck-card__header {
-    gap: 10px;
-    padding-inline: 14px;
-  }
-
-  .badluck-card__header h1 {
-    font-size: clamp(1.45rem, 7.6vw, 2.15rem);
+  .badluck-title-card h1 {
+    font-size: clamp(1.45rem, 9.2vw, 3.15rem);
   }
 
   .badluck-avatar {
-    border-width: 3px;
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+  }
+
+  .badluck-form-card {
+    padding-inline: 18px;
+  }
+
+  .badluck-combobox__field {
+    gap: 10px;
   }
 
   .badluck-actions {

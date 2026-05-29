@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const siteUrl = "https://badluckryan.crisnnino.com";
@@ -7,14 +7,21 @@ const siteTitle = "The Bad Luck Ryan";
 const siteDescription =
   "Genera y comparte una imagen de Ryan Castro usando la camiseta del rival para invocar la mala suerte del otro equipo.";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const datatype = localFont({
+  src: [
+    {
+      path: "./fonts/datatype-latin.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "./fonts/datatype-latin-ext.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+  ],
+  display: "swap",
+  variable: "--font-datatype",
 });
 
 export const metadata: Metadata = {
@@ -88,7 +95,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${datatype.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

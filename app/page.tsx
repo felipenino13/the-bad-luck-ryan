@@ -8,11 +8,11 @@ export default function Home() {
     applicationCategory: "EntertainmentApplication",
     description:
       "Genera y comparte una imagen de Ryan Castro usando la camiseta del rival para invocar la mala suerte del otro equipo.",
-    image: "https://badluckryan.crisnnino.com/og-bad-luck-ryan.jpg",
+    image: "https://the-bad-luck-ryan.vercel.app/og-bad-luck-ryan.jpg",
     inLanguage: "es-CO",
     name: "The Bad Luck Ryan",
     operatingSystem: "Web",
-    url: "https://badluckryan.crisnnino.com/",
+    url: "https://the-bad-luck-ryan.vercel.app/",
   };
 
   return (
@@ -21,29 +21,36 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Image
-        className="badluck-background"
-        src="/background-ryan-optimized.jpg"
-        alt="Ryan Castro con dibujos de mala suerte alrededor"
-        fill
-        sizes="(max-width: 700px) 100vw, 1600px"
-        preload
-        quality={75}
-      />
 
-      <section className="badluck-card" aria-labelledby="badluck-title">
-        <header className="badluck-card__header">
-          <h1 id="badluck-title">THE BAD LUCK RYAN</h1>
-          <Image
-            className="badluck-avatar"
-            src="/avatar-ryan.webp"
-            alt="Ryan Castro"
-            width={88}
-            height={88}
-          />
-        </header>
+      <section className="badluck-hero" aria-labelledby="badluck-title">
+        <Image
+          className="badluck-background"
+          src="/ryan-background-high-100.jpg"
+          alt="Ryan Castro con dibujos de mala suerte alrededor"
+          fill
+          sizes="100vw"
+          preload
+          quality={75}
+        />
 
-        <div className="badluck-card__body">
+        <div className="badluck-title-card">
+          <h1 id="badluck-title">
+            <span>BAD LUCK</span>
+            <Image
+              className="badluck-avatar"
+              src="/gif-ryan%20(1).gif"
+              alt="Ryan Castro"
+              width={88}
+              height={88}
+              unoptimized
+            />
+            <span>RYAN</span>
+          </h1>
+        </div>
+      </section>
+
+      <section className="badluck-playground" aria-label="Generador Bad Luck Ryan">
+        <div className="badluck-form-card">
           <div className="badluck-copy">
             <p>
               Ryan Castro tiene un don que nadie quisiera tener: camiseta que
@@ -58,11 +65,11 @@ export default function Home() {
 
           <BadLuckForm />
         </div>
-      </section>
 
-      <p className="badluck-warning">
-        Advertencia: esta página puede afectar el rendimiento de tu equipo.
-      </p>
+        <p className="badluck-warning">
+          Advertencia: Este sitio puede afectar el rendimiento de tu equipo.
+        </p>
+      </section>
     </main>
   );
 }
