@@ -61,7 +61,7 @@ function GeneratedImagePreview({ state }: { state: BadLuckSubmissionState }) {
     return (
       <div className="badluck-result badluck-result--loading" aria-live="polite">
         <div className="badluck-result__loader" aria-hidden="true" />
-        <p>Enviando solicitud y generando imagen...</p>
+        <p>Espera un momento, la mala suerte se está cargando...</p>
       </div>
     );
   }
